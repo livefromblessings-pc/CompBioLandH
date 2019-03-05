@@ -98,6 +98,8 @@ dm_are_not_df ["III","dont"]
 #lab step 25: switch 'Lenny's' rankinkings back to original set up using names for indexing instead of numbers
 #Yeah i can't figure out how to do this at the data frame level, only at the vector level
 #so I can't index with names.
+any <- replace(any,)
+
 any <- replace(any, c(2, 5), any[c(5, 2)])
 dm_are_not_df <- data.frame(i, dont, have, any, friends)
 row.names(dm_are_not_df) <- episodes

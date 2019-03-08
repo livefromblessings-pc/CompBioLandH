@@ -25,7 +25,8 @@ r = 0.8
 K = 10000
 t = 12
 ```
-/play makeitso Good Luck using this script! :bowtie: :octocat:
+Good Luck using this script! :bowtie: :octocat:
+
 LGMod_Function is an assignment from [Lab08](https://github.com/flaxmans/CompBio_on_git/blob/master/Labs/Lab08/Lab08_documentation_and_metadata.md) for EBIO5240 Comp Bio.
 
 > Written with [StackEdit](https://stackedit.io/).

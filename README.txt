@@ -1,1 +1,0 @@
-This repository is for labs and homework I have completed for the EBIO5240 Computational Biology course.

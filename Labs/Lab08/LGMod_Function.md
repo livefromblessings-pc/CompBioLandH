@@ -1,7 +1,6 @@
 ﻿
 ## A Function for the Logistic Growth Model
 The provided script is for turning the logistic growth model equation into an R function. 
- image of output from model
 
 ### Logistic Growth Model, what the heck is that?
 A logistic growth model (LGMod) allows ecologist to determine the abundance of a population over a certain amount of time. This is determined with specified parameters. The parameters are

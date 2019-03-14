@@ -70,16 +70,19 @@ predAbun <- rep(0, t) #pred abundance vector
 #third: write a for loop that implements the "L-V" pred-prey dicrete time model.
 #prey abundance -n- = initprey + (r * initprey) - (a * initprey * initpred)
 #pred abundance -p- = initpred + (k * a * initprey * initpred) - (m * initpred)
+#put the [i] on the x that you want to repeat the action on, and put it in every spot that the x is so that
+#at each point that x has a repeat action put on it
 for (i in 1:t) {
-  n <- initPrey + (r * initPrey) - (a * initPrey * initPred)
-  initPrey <- n
-  p <- initPred + (k * a * initPrey * initPred) - (m * initPred) 
-  initPred <- p
-  preyAbun[i] <- n
-  predAbun[i] <- p
+  preyAbun[i] <- initPrey + (r * initPrey) - (a * initPrey * initPred)
+  initPrey <- preyAbun[i]
+  predAbun[i] <- initPred + (k * a * initPrey * initPred) - (m * initPred) 
+  initPred <- predAbun[i]
+  #preyAbun[i] <- n
+  #predAbun[i] <- p
 }
 
 #fourth: add if statement that if the prey abundance is -, then set prey value to 0
+#so when you are making a for loop, i has to be iterated in the loop step, which means that if you don't have i.3eesswsssswsx
 for (i in 1:t) {
   n <- initPrey + (r * initPrey) - (a * initPrey * initPred)
   initPrey <- n

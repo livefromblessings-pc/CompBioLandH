@@ -18,37 +18,39 @@ The main R packages used to analyze the data were the ampvis2 and ggplot package
 Exploratory analysis is the first step to understanding a dataset. 
 For this analysis this means looking at how samples cluster, for instance based on dissimarity, and which individual taxa make up the microbial community of each sample.  For this part we will be using a packaged called "ampvis2" to explore how the OTUs and metadata influence each other. The goal of this part of a reanalysis is to see if the output we get from our analysis resembles the original analysis done by Deng+
 
-![PCoA]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostPCoA.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostPCoA.jpeg))
+![PCoA]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostPCoA.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostPCoA.jpeg)
+
 So this PcoA doesn't look like dang et al. One reason could be that we don't have any L3 samples! This could be a result of the samples we filtered out early that weren't also represented in the otutab. Or since we are using a different analysis package they could also ordinate differently (but that shouldn't matter right?). Who knows, ordinations are mostly to get to know the data. What's nice is our samples do cluster  by Level! That's reassuring because they did the same on the Deng+ plot. Not sure what this means yet "using both transformation AND a distance measure is not recommended for distance-based ordination." (From warning message) .
 
 Now lets see which taxa are present in each sample. Since we have a lot of OTUs, for this analysis we are just looking for top taxa, not rare OTUs. You can do this by calculating mean for a specific OTU across all sample (I think......) but this package does this for you and lists the top taxa. Yay!
 
 ![heatmap](
-[https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostHeatmapTop19.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostHeatmapTop19.jpeg))
+[https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostHeatmapTop19.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostHeatmapTop19.jpeg)
 
 This heatmap shows which taxa at the Phylum rank are Top 19 in samples at soil types L1, L2, and L3. Deng+ have a stacked bar chart, but the Phylum listed in this heat map match exactly!!!! And there relative amounts (% of samples) seem to match as well!! What's lame is that all the Proteobacteria are grouped together, there a several types of Proteo, such as alpha, gamma, beta, and Deng+ and all seperated these out in their analysis. At the lower amounts I have some that Deng+ grouped together in their "Other" category. Also it seems that for their analysis, they have more samples because they have L3 otus even though those were not provided with this dataset OR, I filtered incorrectly and there were some L3 with OTUs.
 
  Inference analysis asks who's there, what are they doing, how will biotic & abiotic factors influence community changes and vice versa. The question for this analysis is... "Does the amount of soil carbon differ across a thaw progression gradient & correlate with beta diversity across sites?" A way to look at this is to compare our abundance heatmap to a barplot that displays: x = Site, y = perC, and each dot is a sample, colored by Level.
 
-![boxplot]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostBoxplot.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostBoxplot.jpeg))
+![boxplot]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostBoxplot.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostBoxplot.jpeg)
 
 In the paper, there are 3 sites with varying that progression. Ex = extensive thawing, Mi = minimal thawing, and Mo = moderate thawing. According to this boxplot, the amount of soil carbon doesn't differ across a thaw progression gradient. The amount of soil carbon does differ between sample Levels! L4 samples had less carbon than other levels. From the paper, this level is mineral soil below the thaw gradient. It probably has less Carbon because mineral layer soil and less to do with thawing. L1 and L2 samples had the most soil carbon and this is probably because these samples are organic layer soil. O layers are made up of mostly carbon.
 
 Looking at samples individual with barcharts, we see a same trend.: Thawing doesn't have a strong influence on the amount of soil carbon. The extensive thawing L4 samples are the most obvious samples with the least amount of carbon but overall the extensive thawing samples look similar to the others sites. 
 
 ![extensive thawing](
-[https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostEx.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostEx.jpeg))
+[https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostEx.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostEx.jpeg)
 
-![moderate thawing]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMo.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMo.jpeg))
+![moderate thawing]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMo.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMo.jpeg)
 
-![minimal thawing]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMi.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMi.jpeg))
+![minimal thawing]([https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMi.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostMi.jpeg)
 
 Thinking back to our heatmap each map looks similar in terms of most abundant taxa found in sample grouped by level.
 
 Using a network analysis lets see if certain taxa are associated with samples from certain sites. 
 
 ![network analysis](
-[https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostNetwork19.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostNetwork19.jpeg))
+[https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostNetwork19.jpeg](https://github.com/livefromblessings-pc/CompBioLandH/blob/master/Project/DefrostNetwork19.jpeg)
+
 From the plot this doesn't see to be the case. except for two taxa but this sort of network analysis doesn't give their names or OTU IDs. Most Samples had similar taxa composition. Similar to what was seen with the heatmap.
 
 >Paper Citation:

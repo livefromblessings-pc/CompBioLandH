@@ -125,8 +125,7 @@ levelPCoA <- amp_ordinate(myData,
 # this package does this for you and lists the top taxa. Yay!
 # (a) Make a heatmap too see top taxa present in a sample.
 topTaxa19 <- amp_heatmap(myData, group_by = "Level", tax_show = 19) +
-  scale_fill_viridis_c(option = "plasma")
-  
+  scale_fill_viridis_c(option = "plasma") 
 # This heatmap shows which taxa at the Phylum rank are Top 19 in samples at soil types L1, L2, and L3.
 # Deng+ have a stacked bar chart, but the Phylum listed in this heat map match exactly!!!! And
 # there relative amounts (% of samples) seem to match as well!! 
@@ -139,42 +138,74 @@ topTaxa19 <- amp_heatmap(myData, group_by = "Level", tax_show = 19) +
 
 
 ###################################################################
-# ----------------- Part3: Answer The Questions ----------------- #
+# ----------------- Part3: Answer The Question ----------------- #
 ###################################################################
 # Inference analysis asks who's there, what are they doing, how will biotic & abiotic 
 # factors influence community changes and vice versa. 
 # The question for this analysis is...
 # "Does the amount of soil carbon differ across a thaw progression gradient & 
 # correlate with beta diversity across sites?"
-#1:   Use data structure B from Part1 to plot a scatterplot where xaxis is site and yaxis is %c and each point is individual
-#     taxa
-
-#seperate taxa from otus per sample
-library(dplyr)
-#just OTUs per sample
-myTaxa <- select(taxTable, -c(1:6))
-#just OTU taxa identification
-#see with mctoolrs what is map loaded and data loaded and taxa loaded files
-
-#look at a small chunk of the data
-#change to long format with rows = samples & columns = OTU counts per sample
-#mash mapping file and otu table together
-
-#ordination pcoa/pca
-library(vegan)
-
-#taxa in each sample stacked bar chart
-#how does %N differ above and below thaw gradient, how does this correlate with microbes communities
-#3b: For the read counts 
-newReads <- t(justReads)
-newReads2 <- as.data.frame(newReads)
-#which
 
 
+#1: A way to look at this is to compare our abundance heatmap to a barplot that displays:
+# x = Site, y = perC, and each dot is a sample, colored by Level.
+library(ggplot2)
+ggplot(metadataAlt, aes(x = metadataAlt$Site, y = metadataAlt$perC, fill = metadataAlt$Level)) +
+  geom_boxplot() +
+  labs(fill = "Level") +
+  xlab("Site") +
+  ylab("% Soil Carbon") +
+  scale_fill_viridis_d(option = "plasma") 
+# In the paper, there are 3 sites with varying that progression. 
+# Ex = extensive thawing, Mi = minimal thawing, and Mo = moderate thawing. According 
+# to this boxplot, the amount of soil carbon doesn't differ across a
+# thaw progression gradient. The amount of soil carbon does differ between sample Levels!
+# L4 samples had less carbon than other levels. From the paper, this level is mineral
+# soil below the thaw gradient. It probably has less Carbon because mineral layer soil and less
+# to do with thawing. L1 and L2 samples had the most soil carbon and this is probably
+# because these samples are organic layer soil. O layers are made up of mostly carbon.
 
+#2: Looking at samples indvidual with barcharts, we see a same trend. 
+# Thawing doesn't have a strong influence on the amount of soil carbon.
+exSamples <- which(metadataAlt$Site == "Ex")
+moSamples <- which(metadataAlt$Site == "Mo")
+miSamples <- which(metadataAlt$Site == "Mi")
+metadataEx <- metadataAlt[exSamples, ]
+metadataMo <- metadataAlt[moSamples, ]
+metadataMi <- metadataAlt[miSamples, ]
+exBar <- ggplot(metadataEx, aes(metadataEx$ID, metadataEx$perC, fill = metadataEx$Level)) +
+  geom_bar(stat = "identity", width = .5) +
+  labs(fill = "Level") +
+  xlab("Sample") +
+  ylab ("% Soil Carbon") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  coord_fixed(ratio = .5) +
+  scale_fill_viridis_d(option = "plasma") 
 
+moBar <- ggplot(metadataMo, aes(metadataMo$ID, metadataMo$perC, fill = metadataMo$Level)) +
+  geom_bar(stat = "identity", width = .5) +
+  labs(fill = "Level") +
+  xlab("Sample") +
+  ylab ("% Soil Carbon") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  coord_fixed(ratio = .5) +
+  scale_fill_viridis_d(option = "plasma") 
 
+miBar <- ggplot(metadataMi, aes(metadataMi$ID, metadataMi$perC, fill = metadataMi$Level)) +
+  geom_bar(stat = "identity", width = .5) +
+  labs(fill = "Level") +
+  xlab("Sample") +
+  ylab ("% Soil Carbon") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  coord_fixed(ratio = .3) +
+  scale_fill_viridis_d(option = "plasma") 
+# Thinking back to our heatmap each map looks similar in terms of most abundant
+# taxa found in sample grouped by level.
 
+#3: Using a network analysis lets see if certain taxa are associated with samples from 
+# certain sites. 
+amp_otu_network(myData, color_by = "Site", tax_show = 19, tax_empty = "OTU")
+#From the plot this doesn't see to be the case. except for two taxa but this sort of network analysis
+# doesn't give their names or OTU IDs. Most Samples had similar taxa compostion. Similar 
+# to what was seen with the heatmap.
 
-
-siteAndC <- amp_subset_samples(myData, Site = "Ex" & perC <= 10 )

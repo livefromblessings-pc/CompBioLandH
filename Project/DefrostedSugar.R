@@ -150,7 +150,7 @@ topTaxa19 <- amp_heatmap(myData, group_by = "Level", tax_show = 19) +
 #1: A way to look at this is to compare our abundance heatmap to a barplot that displays:
 # x = Site, y = perC, and each dot is a sample, colored by Level.
 library(ggplot2)
-ggplot(metadataAlt, aes(x = metadataAlt$Site, y = metadataAlt$perC, fill = metadataAlt$Level)) +
+siteBox <- ggplot(metadataAlt, aes(x = metadataAlt$Site, y = metadataAlt$perC, fill = metadataAlt$Level)) +
   geom_boxplot() +
   labs(fill = "Level") +
   xlab("Site") +
@@ -204,7 +204,8 @@ miBar <- ggplot(metadataMi, aes(metadataMi$ID, metadataMi$perC, fill = metadataM
 
 #3: Using a network analysis lets see if certain taxa are associated with samples from 
 # certain sites. 
-amp_otu_network(myData, color_by = "Site", tax_show = 19, tax_empty = "OTU")
+taxaNet <- amp_otu_network(myData, color_by = "Site", tax_show = 19, tax_empty = "OTU") +
+  scale_color_viridis_d(option = "plasma")
 #From the plot this doesn't see to be the case. except for two taxa but this sort of network analysis
 # doesn't give their names or OTU IDs. Most Samples had similar taxa compostion. Similar 
 # to what was seen with the heatmap.
